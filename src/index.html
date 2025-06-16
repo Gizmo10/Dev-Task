@@ -46,6 +46,36 @@
     </section>
 
     <footer></footer>
-    <script type="module" src="convert_string.js"></script>
+    <script>
+      const urlElement = document.getElementById("url");
+      const emailElement = document.getElementById("email");
+      const resultElement = document.getElementById("result");
+      const submitButton = document.getElementById("submit");
+
+      submitButton.onclick = async (event) => {
+        event.preventDefault();
+        const urlValue = urlElement.value;
+        const emailValue = emailElement.value;
+        const url = `https://yhxzjyykdsfkdrmdxgho.supabase.co/functions/v1/junior-dev?url=${urlValue}&email=${emailValue}`;
+
+        try {
+          const response = await fetch(url, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+
+          const result = await response.json();
+          console.log(result);
+          resultElement.textContent(result);
+        } catch (error) {
+          throw new Error(`Failed to fetch: ${error.message}`);
+        }
+      };
+    </script>
   </body>
 </html>
