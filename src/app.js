@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3001;
 
-app.post("/", (req, res) => {
+app.use(express.json());
+
+app.post("/convertString", (req, res) => {
   try {
-    console.log(req.body);
-    const data = req.body;
+    const { data } = req.body;
 
     if (typeof data !== "string") {
       throw new Error(`Expected data to be of type string`);
@@ -14,15 +15,20 @@ app.post("/", (req, res) => {
     if (data.length <= 0) {
       throw new Error(`Expected data not to be empty`);
     }
-    console.log(data);
 
-    res.send(data);
+    const stringToArray = data
+      .toLowerCase()
+      .split("")
+      .sort(function (letter1, letter2) {
+        return letter1 === letter2 ? 0 : letter1 < letter2 ? -1 : 1;
+      });
+
+    res.json({ word: stringToArray });
   } catch (error) {
     throw new Error(`Failed to convert string: ${error.message}`);
   }
-  // res.send("POST REQUEST RECEIVED");
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port: ${port}`);
+app.listen(PORT, () => {
+  console.log(`Listening on port: ${PORT}`);
 });

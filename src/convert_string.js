@@ -1,6 +1,6 @@
 const convertString = async function (data) {
   try {
-    const response = await fetch(`http://localhost:3001/`, {
+    const response = await fetch(`http://localhost:3001/convertString`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -9,14 +9,18 @@ const convertString = async function (data) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error! Error: ${response.status}`);
+      throw new Error(`HTTP Error: ${response.status}`);
     }
 
-    const convertedString = data;
-    console.log(convertedString);
+    const result = await response.json();
+    //console.log(result);
+    return result;
   } catch (error) {
     throw new Error(`Failed to convert: ${error.message}`);
   }
 };
+const obj = {
+  data: "String",
+};
 
-convertString("Random");
+convertString(obj);
