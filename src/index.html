@@ -57,21 +57,17 @@
         const urlValue = urlElement.value;
         const emailValue = emailElement.value;
         const url = `https://yhxzjyykdsfkdrmdxgho.supabase.co/functions/v1/junior-dev?url=${urlValue}&email=${emailValue}`;
-        
+
         try {
-          const response = await fetch(url, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          const response = await fetch(url);
 
           if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status}`);
           }
 
           const result = await response.json();
-          console.log(result);
-          resultElement.textContent(result);
+
+          resultElement.value = JSON.stringify(result);
         } catch (error) {
           throw new Error(`Failed to fetch: ${error.message}`);
         }
