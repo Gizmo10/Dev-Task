@@ -4,48 +4,79 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test My API ENDPOINT</title>
+    <style>
+      section {
+        margin: auto;
+        width: 70vw;
+        align-items: center;
+        border: 2px solid black;
+        padding: 2vw;
+      }
+
+      #form {
+        display: flex;
+        flex-direction: column;
+        gap: 3vh;
+      }
+
+      #query-parameters {
+        display: flex;
+        flex-direction: row;
+        gap: 3vw;
+      }
+
+      #result {
+        width: 100%;
+        height: 20vh;
+        white-space: normal;
+        overflow: auto;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <h1>Let's test my endpoint!</h1>
-    </header>
-
     <section>
-      <form>
-        <label for="url">
-          <input
-            type="text"
-            name="url"
-            id="url"
-            placeholder="type in your url endpoint"
-            required
-          />
-        </label>
+      <h1>ENDPOINT TEST</h1>
+      <form id="form">
+        <div id="query-parameters">
+          <div id="url-section">
+            <label for="url">API URL:</label>
+            <input
+              type="text"
+              name="url"
+              id="url"
+              placeholder="type in your url endpoint"
+              required
+            />
+          </div>
 
-        <label for="email">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="type in your email"
-            required
-          />
-        </label>
+          <div id="email-section">
+            <label for="email">EMAIL:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="type in your email"
+              required
+            />
+          </div>
+        </div>
 
-        <label for="result">
+        <div id="output-section">
           <input
             type="textarea"
             name="result"
             id="result"
-            rows="5"
-            cols="100"
+            cols="50"
+            rows="10"
           />
-        </label>
-        <input type="submit" id="submit" />
+        </div>
+
+        <div id="submit-section">
+          <input type="submit" id="submit" />
+        </div>
       </form>
     </section>
 
-    <footer></footer>
     <script>
       const urlElement = document.getElementById("url");
       const emailElement = document.getElementById("email");
